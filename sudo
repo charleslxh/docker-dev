@@ -1,0 +1,4 @@
+127.0.0.1 www.example.com\n127.0.0.1 api.example.com /etc/hosts
+127.0.0.1 www.example.com
+127.0.0.1 api.example.com /etc/hosts
+127.0.0.1 www1.example.com\n127.0.0.1 api1.example.com /etc/hosts

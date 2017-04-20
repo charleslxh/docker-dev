@@ -1,0 +1,2 @@
+127.0.0.1 www1.example.com\n127.0.0.1 api1.example.com
+127.0.0.1 www1.example.com \n 127.0.0.1 api1.example.com

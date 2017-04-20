@@ -1,5 +1,24 @@
 # Docker-dev
 
+A NodeJS development environment, Include nginx proxy, reids sentinel, mongodb
+
+## Run it
+
+1. Install libs.
+
+```bash
+$ npm install
+```
+
+2. Build containers.
+
+```bash
+$ docker-compose up --build
+```
+
+3. Add `www.example.com` and `api.example.com` to `/etc/hosts`
+
+4. Visit [http://www.example.com](http://www.example.com)
 
 ## Generate Self-Signed Certificate
 

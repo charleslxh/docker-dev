@@ -1,0 +1,40 @@
+{
+  "name": "docker-dev",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test",
+    "start": "node ./app/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charleslxh/docker-dev.git"
+  },
+  "keywords": [
+    "docker",
+    "nodejs",
+    "development"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/charleslxh/docker-dev/issues"
+  },
+  "homepage": "https://github.com/charleslxh/docker-dev#readme",
+  "engines": {
+    "node": ">=6.9.4"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.7",
+    "express": "~4.9.0",
+    "ioredis": "^2.5.0",
+    "lodash": "^3.9.3",
+    "mongoose": "^4.8.0",
+    "mongoose-unique-validator": "^1.0.5",
+    "pug": "^2.0.0-beta.12"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  }
+}

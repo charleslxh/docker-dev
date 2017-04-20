@@ -1,0 +1,76 @@
+version: "2.0"
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./volumes/nginx:/etc/nginx:ro
+    volumes_from:
+      - app
+    links:
+      - app:app
+
+  app:
+    build:
+      context: .
+      dockerfile: ./app/Dockerfile
+    depends_on:
+      - mongo
+      - redis_master
+      - redis_slave
+    volumes:
+      - .:/app
+    ports:
+      - 32768:3000
+    environment:
+      NODE_ENV: development
+      MONGO_URL: mongodb://mongo:27017
+      REDIS_URL: redis://user:123456@redis_master:6379
+      REDIS_PASSWORD: 123456
+      REDIS_SENTINEL_PORT: 26379
+      REDIS_REPLICATION_NAME: docker-dev-redis-replication
+      PORT: 3000
+      HOST: 0.0.0.0
+    links:
+      - mongo:mongo
+      - redis_master:redis_master
+      - redis_slave:redis_slave
+
+  mongo:
+    image: mongo:latest
+    command: mongod --smallfiles --dbpath /data/db --nojournal --oplogSize 16 --noauth
+    ports:
+      - 27017:27017
+
+  redis_master:
+    build: ./services/redis
+    environment:
+      ROLE: master
+      PASSWORD: "123456"
+      REPLICATION_NAME: docker-dev-redis-replication
+      MASTER_HOST: redis_master
+      MASTER_PORT: 6379
+      QUORUN: 2
+    expose:
+      - 6379
+      - 26379
+
+  redis_slave:
+    build: ./services/redis
+    depends_on:
+      - redis_master
+    environment:
+      ROLE: slave
+      PASSWORD: 123456
+      REPLICATION_NAME: docker-dev-redis-replication
+      MASTER_HOST: redis_master
+      MASTER_PORT: 6379
+      QUORUN: 2
+    expose:
+      - 6379
+      - 26379
+    links:
+      - redis_master:redis_master
+

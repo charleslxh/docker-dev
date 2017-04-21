@@ -16,9 +16,21 @@ $ npm install
 $ docker-compose up --build
 ```
 
-3. Add `www.example.com` and `api.example.com` to `/etc/hosts`
+3. Clear all container's history logs.
 
-4. Visit [http://www.example.com](http://www.example.com)
+```bash
+for containerId in $(docker-compose ps -q);do sudo truncate -s 0 $(docker inspect --format='{{.LogPath}}' $containerId);done
+```
+
+4. View logs, (use `-f` to follow log output).
+
+```bash
+docker-compose logs -f <service_name>
+```
+
+4. Add `www.example.com` and `api.example.com` to `/etc/hosts`
+
+5. Visit [http://www.example.com](http://www.example.com)
 
 ## Generate Self-Signed Certificate
 

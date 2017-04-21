@@ -26,7 +26,7 @@ services:
       - 32768:3000
     environment:
       NODE_ENV: development
-      MONGO_URL: mongodb://mongo:27017
+      MONGO_URL: mongodb://mongo:27017/docker-dev
       REDIS_URL: redis://user:123456@redis_master:6379
       REDIS_PASSWORD: 123456
       REDIS_SENTINEL_PORT: 26379
